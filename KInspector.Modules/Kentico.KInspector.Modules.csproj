@@ -107,15 +107,20 @@
     <Compile Include="Export\Modules\ExportXmlExtensions.cs" />
     <Compile Include="Export\NpoiMemoryStream.cs" />
     <Compile Include="Helpers\MacroValidator.cs" />
-    <Compile Include="Helpers\ProbeHelper.cs" />
     <Compile Include="Helpers\ProjectCodeFilesHelper.cs" />
     <Compile Include="Modules\Content\AttachmentsBySizeModule.cs" />
     <Compile Include="Modules\Content\DBFileConsistencyModule.cs" />
     <Compile Include="Modules\Content\NumberOfAliasesModule.cs" />
     <Compile Include="Modules\Content\RobotsTxtModule.cs" />
     <Compile Include="Modules\Content\PageTypeAssignedToSiteModule.cs" />
+    <Compile Include="Modules\Content\UnusedPageTypesModule.cs" />
+    <Compile Include="Modules\Content\IdenticalTemplateLayoutsModule.cs" />
+    <Compile Include="Modules\Content\UnusedTemplatesModule.cs" />
     <Compile Include="Modules\Content\WebPartsInTransformationsModule.cs" />
     <Compile Include="Modules\Content\WorkflowConsistencyModule.cs" />
+    <Compile Include="Modules\General\ClassTableValidation.cs" />
+    <Compile Include="Modules\General\TaskProcessingIssuesModule.cs" />
+    <Compile Include="Modules\General\DebugCheckModule.cs" />
     <Compile Include="Modules\EventLog\EventLogErrorsModule.cs" />
     <Compile Include="Modules\Content\DuplicatePageAliasesModule.cs" />
     <Compile Include="Modules\EventLog\EventLogSizeModule.cs" />
@@ -125,26 +130,20 @@
     <Compile Include="Modules\Content\WebPartColumnsModule.cs" />
     <Compile Include="Modules\EventLog\PageNotFoundsModule.cs" />
     <Compile Include="Modules\EventLog\ApplicationRestartsModule.cs" />
-    <Compile Include="Modules\General\CacheItemsModule.cs" />
     <Compile Include="Modules\General\InstanceInfoModule.cs" />
-    <Compile Include="Modules\General\OldWebFarmTasks.cs" />
     <Compile Include="Modules\General\PagesAnalyzerModule.cs" />
     <Compile Include="Modules\Content\SiteTemplatesModule.cs" />
     <Compile Include="Modules\General\ScreenshotterModule.cs" />
-    <Compile Include="Modules\General\SiteMapModule.cs" />
-    <Compile Include="Modules\General\CMSFileModule.cs" />
     <Compile Include="Modules\General\ScheduledTasksModule.cs" />
     <Compile Include="Modules\General\DocumentsConsistencyIssuesModule.cs" />
     <Compile Include="Modules\OnlineMarketing\OMContactGroupsWithManualMacro.cs" />
     <Compile Include="Modules\OnlineMarketing\OMInactiveContactsDeletion.cs" />
-    <Compile Include="Modules\OnlineMarketing\OMNewslettersWithoutQueue.cs" />
     <Compile Include="Modules\OnlineMarketing\OMTablesSize.cs" />
+    <Compile Include="Modules\General\DisabledWebPartAnalyzer.cs" />
     <Compile Include="Modules\Security\DataStructures\VulnerabilityAnalysisResults.cs" />
-    <Compile Include="Modules\Security\FloodProtectionModule.cs" />
-    <Compile Include="Modules\Security\PasswordPolicyModule.cs" />
+    <Compile Include="Modules\Security\PasswordFormatModule.cs" />
     <Compile Include="Modules\Security\SecurityAppSettingsModule.cs" />
     <Compile Include="Modules\Security\SecuritySettingsModule.cs" />
-    <Compile Include="Modules\Security\SslInAdministrationModule.cs" />
     <Compile Include="Modules\Security\TransformationAnalyzerModule.cs" />
     <Compile Include="Modules\Security\UsersWithPlaintextPasswordsModule.cs" />
     <Compile Include="Modules\Security\VulnerabilityAnalyzerModule.cs" />
@@ -154,9 +153,6 @@
     <Compile Include="Modules\General\BigTablesModule.cs" />
     <Compile Include="Modules\Security\WebPartAnalyzerModule.cs" />
     <Compile Include="Modules\Setup\GlobalAdminSetupModule.cs" />
-    <Compile Include="Modules\Setup\LicenseSetupModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Modules\Setup\SiteDomainAliasesSetupModule.cs" />
     <Compile Include="Modules\Setup\SitesSetupModule.cs" />
     <Compile Include="Modules\Setup\SmtpServersSetupModule.cs" />
@@ -181,15 +177,6 @@
     <Content Include="Data\DefaultInstallationFiles\K8website.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProbeData\CMSPages\KInspectorProbe.aspx.cs">
-      <DependentUpon>KInspectorProbe.aspx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="ProbeData\CMSPages\KInspectorProbe.aspx.designer.cs">
-      <DependentUpon>KInspectorProbe.aspx.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,10 +186,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ProbeData\CMSPages\KInspectorProbe.aspx">
+    <Content Include="Scripts\ClassTableValidationClasses.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\FloodProtectionModule.sql">
+    <Content Include="Scripts\ClassTableValidationTables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\DisabledWebPartAnalyzerModule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\DebugCheckModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\GetLibraryAndAttachmentFiles.sql">
@@ -211,7 +204,31 @@
     <Content Include="Scripts\PageTypeFieldsDataTypeMismatchModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Setup\GlobalAdminSetupModule-V10.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\Setup\GlobalAdminSetupModule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\TaskProcessingIssueModule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\TransformationAnalyzerModule-GetDataWhereIn-KI_ClassNames.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\TransformationAnalyzerModule-Initialize-KI_ClassNames.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\TransformationAnalyzerModule-Initialize-KI_TransformationList.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\UnusedPageTypesModule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\IdenticalTemplateLayoutsModule.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\UnusedTemplatesModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\WebPartColumnsModule9.sql">
@@ -238,13 +255,10 @@
     <Content Include="Scripts\ScreenshotterModule-v9.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\SslInAdministration.sql">
+    <Content Include="Scripts\PasswordFormat.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\PasswordPolicy.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\TransformationAnalyzerModule-TransformationCodes.sql">
+    <Content Include="Scripts\TransformationAnalyzerModule-GetDataWhereIn-KI_TransformationList.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\TransformationAnalyzerModule-PageTemplateWebParts.sql">
@@ -269,9 +283,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\OMInactiveContactsDeletion.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\OMNewslettersWithoutQueue.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\OMContactGroupsWithManualMacro.sql">
@@ -307,9 +318,6 @@
     <Content Include="Scripts\SecuritySettingsModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\Setup\LicenseSetupModule.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\Setup\SiteDomainAliasesSetupModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -335,20 +343,14 @@
     <Content Include="Scripts\WebPartColumnsModule6.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\WebPartColumnsModule.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\SiteMapModule.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\CMSFileModule.sql">
+    <Content Include="Scripts\WebPartColumnsModule7.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\ScheduledTasksModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\DocumentsConsistencyIssuesModule.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\UsersWithEmptyPasswordsModule.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

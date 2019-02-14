@@ -15,7 +15,9 @@ namespace Kentico.KInspector.Modules
                 SupportedVersions = new[] { 
                     new Version("8.1"), 
                     new Version("8.2"),
-                    new Version("9.0")
+                    new Version("9.0"),
+                    new Version("10.0"),
+                    new Version("11.0")
                 },
                 Comment = @"Checks whether Online marketing tables aren't too big.
 

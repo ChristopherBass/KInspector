@@ -8,4 +8,4 @@ SELECT
 FROM CMS_SettingsKey 
 LEFT OUTER JOIN CMS_Site ON CMS_SettingsKey.SiteID = CMS_Site.SiteID
 WHERE 
-	(CMS_SettingsKey.KeyName IN ('CMSUsePasswordPolicy', 'CMSPasswordFormat')) 
+	(CMS_SettingsKey.KeyName IN ('CMSPasswordFormat')) 
