@@ -11,11 +11,41 @@
 <body>
     <div ng-view></div>
 
+	<!-- TEMPLATE FOR THE IIS SETUP PAGE -->
+	<script type="text/ng-template" id="partials/iis-setup.html">
+		<div class="panel panel-info">
+			<p>
+				Welcome to an application for analyzing Kentico instances. If you want to select directly by credentials instead, click <a href="#/target-setup">here</a>.
+			</p>
+			<p>
+				It <strong>doesn't modify any data, unless stated otherwise</strong>, but it is not recommended to run it on production server.
+			</p>
+		</div>
+		<div data-knl-error-message></div>
+		<form>
+			<fieldset>
+				<legend>Target setup</legend>
+
+				<ul class="allSites">
+					<li ng-repeat="x in sitesList"><input id="site{{$index}}" type="radio" ng-model="model.config.IISSiteName" value="{{x.m_Item1}}" /><label for="site{{$index}}">{{x.m_Item1}}: {{x.m_Item2}}</label></li>
+				</ul>
+
+
+				<div class="row">
+					<button style="width: 215px;" type="submit" class="button login-button" ng-click="iisconnect()">
+						<span ng-hide="model.showLoader">Connect to Kentico</span>
+						<knl-loader ng-show="model.showLoader" />
+					</button>
+				</div>
+			</fieldset>
+		</form>
+	</script>
+	<!-- END OF TEMPLATE FOR THE IIS SETUP PAGE -->
     <!-- TEMPLATE FOR THE KENTICO SETUP PAGE -->
     <script type="text/ng-template" id="partials/target-setup.html">
         <div class="panel panel-info">
             <p>
-                Welcome to an application for analyzing Kentico instances.
+				Welcome to an application for analyzing Kentico instances. If you want to select by IIS Site name instead, click <a href="#/iis-setup">here</a>.
             </p>
             <p>
                 It <strong>doesn't modify any data, unless stated otherwise</strong>, but it is not recommended to run it on production server.
@@ -167,8 +197,9 @@
         <div class="sidebar">
             <div class="panel">
                 <ul class="sidebar-overview">
-                    <li>Server: {{model.serverName}}</li>
-                    <li>Database: {{model.databaseName}}</li>
+					<li ng-if="model.iisSiteName">Site: {{model.iisSiteName}}</li>
+					<li ng-if="!model.iisSiteName">Server: {{model.serverName}}</li>
+					<li ng-if="!model.iisSiteName">Database: {{model.databaseName}}</li>
                 </ul>
             </div>
 
@@ -187,8 +218,9 @@
         <div class="sidebar">
             <div class="panel">
                 <ul class="sidebar-overview">
-                    <li>Server: {{model.serverName}}</li>
-                    <li>Database: {{model.databaseName}}</li>
+					<li ng-if="model.iisSiteName">Site: {{model.iisSiteName}}</li>
+					<li ng-if="!model.iisSiteName">Server: {{model.serverName}}</li>
+					<li ng-if="!model.iisSiteName">Database: {{model.databaseName}}</li>
                 </ul>
             </div>
 

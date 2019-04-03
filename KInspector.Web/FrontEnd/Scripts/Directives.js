@@ -138,6 +138,7 @@
                     $scope.model = {};
 
                     var config = configService.getConfig();
+					$scope.model.iisSiteName = config.IISSiteName;
                     $scope.model.serverName = config.Server;
                     $scope.model.databaseName = config.Database;
 
@@ -161,6 +162,7 @@
                     $scope.model = {};
 
                     var config = configService.getConfig();
+					$scope.model.iisSiteName = config.IISSiteName;
                     $scope.model.serverName = config.Server;
                     $scope.model.databaseName = config.Database;
 
