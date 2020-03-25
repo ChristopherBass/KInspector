@@ -6,7 +6,7 @@
     angular.module(kinspectorAppName, ['ngRoute', 'knlServices', 'knlDirectives'])
         /**
          * The first visible page. User sets Kentico settings and then is able to redirect to the main menu.
-         * Its route is set in the module config - is bound to '/target-setup' route
+         * Its route is set in the module config - is bound to '/iis-setup' route
          */
         .controller('knlTargetSetupController', function ($scope, $location, $http, $rootScope, knlTargetConfigService) {
             $scope.model = $scope.model || {};
@@ -21,6 +21,8 @@
 				.error(function () {
 					$scope.model.showLoader = false;
 				});
+
+
             // This gets called when user pushes a button to connect
             $scope.connect = function () {
 				$scope.model.config.IISSiteName = "";
@@ -30,7 +32,7 @@
 
                 $scope.model.showLoader = true;
 
-                $http.get("http://localhost:9000/api/modules/GetKenticoVersion/", { params: $scope.model.config })
+                $http.get("/api/modules/GetKenticoVersion/", { params: $scope.model.config })
                     .success(function (data) {
 
                         // Hack - clear the cached module results
@@ -45,7 +47,7 @@
                     .error(function () {
                         $scope.model.showLoader = false;
                     });
-            }
+			}
 
 			$scope.iisconnect = function () {
 				
@@ -62,7 +64,7 @@
 
 				$scope.model.showLoader = true;
 
-				$http.get("http://localhost:9000/api/modules/GetKenticoVersion/", { params: $scope.model.config })
+				$http.get("/api/modules/GetKenticoVersion/", { params: $scope.model.config })
 					.success(function (data) {
 
 						// Hack - clear the cached module results
@@ -172,7 +174,7 @@
          * Web.config of the application
          */
         .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-            $routeProvider
+			$routeProvider
 				.when('/iis-setup', {
 					templateUrl: 'partials/iis-setup.html',
 					controller: 'knlTargetSetupController'

@@ -7,7 +7,7 @@ using Kentico.KInspector.Core;
 using Microsoft.Web.Administration;
 using System.Collections.Generic;
 
-namespace Kentico.KInspector.Web
+namespace Kentico.KInspector.WebApplication.WebApi.Controllers
 {
     public class ModulesController : ApiController
 	{
@@ -129,7 +129,7 @@ namespace Kentico.KInspector.Web
 				return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
 			}
 		}
-		
+
 		/// <summary>
 		/// Get api/modules/GetIISSites
 		/// </summary>
@@ -159,5 +159,5 @@ namespace Kentico.KInspector.Web
 				return Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
 			}
 		}
-    }
+	}
 }
